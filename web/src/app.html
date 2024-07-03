@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<style>
+h1, h2, h3, h4, h5, h6 {
+	margin: 2px;
+}
+
+		input, ul, p {
+			margin: 0;
+		}
+		
+		</style>
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/google-closure-library/20230802.0.0/base.js" integrity="sha512-HoVQuj+VaDXcMklOD5R8PhRYcQTuG44p9U+RPT9/5089rK9H0/6Cv8Dz39oiGM5LyB34qEIvz+9/GbVQ0wjueA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover" style="background-color: #facdcd">
+		<div style="display: contents">
+			<div style="display: flex; justify-content: center;">
+				<div style="width: 750px;">
+					<div>
+						<h1>BART</h1>
+						<p>Bowling Analysis and Research Tool v2.0</p>
+						<hr/>
+					</div>
+					<div>
+					%sveltekit.body%
+					</div>
+					<hr/>
+					<div>
+						<p>Copyright &copy; <a href="https://nickorlow.com">Nicholas Orlowsky</a> 2024</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
