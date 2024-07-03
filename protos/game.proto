@@ -2,6 +2,8 @@ message FrameThrowState {
     repeated bool is_standing = 1;
     required uint32 pins_standing = 2;
     required bool foul = 3;
+    optional double ball_speed = 4;
+    optional uint32 ball_weight = 5; 
 }
 
 message Frame {

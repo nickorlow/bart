@@ -35,7 +35,7 @@
     }
 
     .mark-button {
-        padding: 5px;
+        padding: 10px;
         width: 100%;
     }
 </style>
@@ -43,6 +43,7 @@
 <script lang="ts">
     import { writable } from "svelte/store";
     import {Bowler, BowlerGame, Frame, FrameThrowState, Game} from "../../protos/game";
+	import { walk } from "svelte/compiler";
 
     let new_bowler_name: string;
     let new_alley_name: string;
@@ -55,6 +56,8 @@
     let cur_throw = 0;
     let cur_pinfall: boolean[] = Array(10).fill(false);
     let game_over: boolean = false;
+    let ball_weight: number = 0;
+    let ball_speed: number = 0.0;
 
     let fts: Frame;
 
@@ -88,6 +91,9 @@
 
             game.bowler_games[cur_bowler].frames[cur_frame] = fts;
 
+            fts.first_throw.ball_weight = ball_weight;
+            fts.first_throw.ball_speed = ball_speed;
+
             if (fill_out || cur_pinfall.filter(Boolean).length == 10) {
                 fts.first_throw.pins_standing = 0;
                 fts.second_throw.pins_standing = 0;
@@ -119,6 +125,9 @@
                 fts.second_throw.is_standing = cur_pinfall.map((x) => !x)
             }
 
+            fts.second_throw.ball_weight = ball_weight;
+            fts.second_throw.ball_speed = ball_speed;
+
             for(let i = 0; i < 10; i++)
                 cur_pinfall[i] = false;
 
@@ -130,6 +139,8 @@
                 cur_bowler++;
             }
         }
+
+        ball_speed = 0.0;
 
         game.bowler_games = game.bowler_games;
         window.localStorage.setItem('cur_gamedata', gameAsBase64());
@@ -302,6 +313,10 @@
                                     if (k == 0 || k == 2 || k == 5)
                                         ret += "<br/>"
                                 }
+                                ret += "<br/>";
+                                ret += "Speed: " + bowler_game.frames[i].first_throw.ball_speed + " mph";
+                                ret += "<br/>";
+                                ret += "Weight: " + bowler_game.frames[i].first_throw.ball_weight + " lbs";
                                 return ret
                             }()}</span>
                         </div>
@@ -340,6 +355,14 @@
         </div>
         
         <div>
+            <div style="display: flex; margin-top: 10px; margin-bottom: 10px; justify-content: space-between;">
+            <input type="range" min="1" max="16" step="1" class="slider" id="myRange" bind:value={ball_weight}> 
+            <p>{ball_weight} lb ball</p>
+            </div>
+            <div style="display: flex; margin-top: 10px; margin-bottom: 10px; justify-content: space-between;">
+            <input type="range" min="0" max="30" step="0.1" class="slider" id="myRange" bind:value={ball_speed}> 
+            <p>{ball_speed} mph</p>
+            </div>
             <button disabled={game_over} class="mark-button" on:click={() => {process_frame(false)}}>Mark Frame</button>
         
             {#if cur_throw == 0}

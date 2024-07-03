@@ -10,6 +10,8 @@ export class FrameThrowState extends pb_1.Message {
         is_standing: boolean[];
         pins_standing: number;
         foul: boolean;
+        ball_speed?: number;
+        ball_weight?: number;
     }) {
         super();
         pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
@@ -17,6 +19,12 @@ export class FrameThrowState extends pb_1.Message {
             this.is_standing = data.is_standing;
             this.pins_standing = data.pins_standing;
             this.foul = data.foul;
+            if ("ball_speed" in data && data.ball_speed != undefined) {
+                this.ball_speed = data.ball_speed;
+            }
+            if ("ball_weight" in data && data.ball_weight != undefined) {
+                this.ball_weight = data.ball_weight;
+            }
         }
     }
     get is_standing() {
@@ -43,16 +51,42 @@ export class FrameThrowState extends pb_1.Message {
     get has_foul() {
         return pb_1.Message.getField(this, 3) != null;
     }
+    get ball_speed() {
+        return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+    }
+    set ball_speed(value: number) {
+        pb_1.Message.setField(this, 4, value);
+    }
+    get has_ball_speed() {
+        return pb_1.Message.getField(this, 4) != null;
+    }
+    get ball_weight() {
+        return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+    }
+    set ball_weight(value: number) {
+        pb_1.Message.setField(this, 5, value);
+    }
+    get has_ball_weight() {
+        return pb_1.Message.getField(this, 5) != null;
+    }
     static fromObject(data: {
         is_standing: boolean[];
         pins_standing?: number;
         foul?: boolean;
+        ball_speed?: number;
+        ball_weight?: number;
     }): FrameThrowState {
         const message = new FrameThrowState({
             is_standing: data.is_standing,
             pins_standing: data.pins_standing,
             foul: data.foul
         });
+        if (data.ball_speed != null) {
+            message.ball_speed = data.ball_speed;
+        }
+        if (data.ball_weight != null) {
+            message.ball_weight = data.ball_weight;
+        }
         return message;
     }
     toObject() {
@@ -60,6 +94,8 @@ export class FrameThrowState extends pb_1.Message {
             is_standing: boolean[];
             pins_standing?: number;
             foul?: boolean;
+            ball_speed?: number;
+            ball_weight?: number;
         } = {
             is_standing: this.is_standing
         };
@@ -68,6 +104,12 @@ export class FrameThrowState extends pb_1.Message {
         }
         if (this.foul != null) {
             data.foul = this.foul;
+        }
+        if (this.ball_speed != null) {
+            data.ball_speed = this.ball_speed;
+        }
+        if (this.ball_weight != null) {
+            data.ball_weight = this.ball_weight;
         }
         return data;
     }
@@ -81,6 +123,10 @@ export class FrameThrowState extends pb_1.Message {
             writer.writeUint32(2, this.pins_standing);
         if (this.has_foul)
             writer.writeBool(3, this.foul);
+        if (this.has_ball_speed)
+            writer.writeDouble(4, this.ball_speed);
+        if (this.has_ball_weight)
+            writer.writeUint32(5, this.ball_weight);
         if (!w)
             return writer.getResultBuffer();
     }
@@ -98,6 +144,12 @@ export class FrameThrowState extends pb_1.Message {
                     break;
                 case 3:
                     message.foul = reader.readBool();
+                    break;
+                case 4:
+                    message.ball_speed = reader.readDouble();
+                    break;
+                case 5:
+                    message.ball_weight = reader.readUint32();
                     break;
                 default: reader.skipField();
             }
