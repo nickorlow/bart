@@ -360,8 +360,8 @@
             <p>{ball_weight} lb ball</p>
             </div>
             <div style="display: flex; margin-top: 10px; margin-bottom: 10px; justify-content: space-between;">
-            <input type="range" min="0" max="30" step="0.1" class="slider" id="myRange" bind:value={ball_speed}> 
-            <p>{ball_speed} mph</p>
+            <input type="number" id="myRange" style="width: 4em;" bind:value={ball_speed}> 
+            <p> mph</p>
             </div>
             <button disabled={game_over} class="mark-button" on:click={() => {process_frame(false)}}>Mark Frame</button>
         
