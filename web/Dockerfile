@@ -9,4 +9,6 @@ COPY . ./
 RUN npm run build
 
 RUN ls -la
+ENV PORT=80
+EXPOSE 80
 ENTRYPOINT ["node", "/app/build/index.js"]
