@@ -38,6 +38,13 @@
         padding: 10px;
         width: 100%;
     }
+
+    button {
+        -webkit-appearance: none;
+        border-radius: 0;
+        border: none;
+        margin: 3px;
+    }
 </style>
 
 <script lang="ts">
@@ -330,27 +337,29 @@
 </table>
 
 {#if !game_over}
-<p>Throw <input style="width: 2em;" bind:value={cur_throw}/> of frame <input style="width: 2em;" bind:value={cur_frame}/> for {game.bowler_games[cur_bowler].bowler} (id <input style="width: 2em;" bind:value={cur_bowler}/>) at {game.alley}</p>
-<div style="display: flex; justify-content: center; width: 100%;">
+<p style="margin-top: 5px;">Throw <input style="width: 2em;" bind:value={cur_throw}/> of frame <input style="width: 2em;" bind:value={cur_frame}/> for {game.bowler_games[cur_bowler].bowler} (id <input style="width: 2em;" bind:value={cur_bowler}/>) at {game.alley}</p>
+<div style="display: flex; justify-content: center; width: 100%; margin-top: 20px;">
     <div>
-        <div style="width: min-content;">
-            <div style="display: flex; justify-content: center;">
-                <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[6]}>
-                <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[7]}>
-                <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[8]}>
-                <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[9]}>
-            </div>
-            <div style="display: flex; justify-content: center;">
-                <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[3]}>
-                <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[4]}>
-                <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[5]}>
-            </div>
-            <div style="display: flex; justify-content: center;">
-                <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[1]}>
-                <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[2]}>
-            </div>
-            <div style="display: flex; justify-content: center;">
-                <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[0]}>
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <div style="width: min-content;">
+                <div style="display: flex; justify-content: center;">
+                    <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[6]}>
+                    <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[7]}>
+                    <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[8]}>
+                    <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[9]}>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[3]}>
+                    <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[4]}>
+                    <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[5]}>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[1]}>
+                    <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[2]}>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <input class="pin-box" type="checkbox" bind:checked={cur_pinfall[0]}>
+                </div>
             </div>
         </div>
         
